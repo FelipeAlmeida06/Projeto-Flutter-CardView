@@ -25,6 +25,9 @@ class _HorariosPageState extends State<HorariosPage> {
   Future<void> _fetchHorarios(String nome) async {
     final url = Uri.parse('http://localhost:3000/monitores'); // URL da API
 
+    //final url = Uri.parse('http://localhost:3000'); // URL da API
+    //final url = Uri.parse('http://10.0.2.2:3000/monitores');
+
     try {
       final response = await http.get(url);
 

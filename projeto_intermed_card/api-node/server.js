@@ -2,6 +2,14 @@ const express = require('express');
 const app = express();
 const porta = 3000;
 
+// cors
+const cors = require('cors');
+
+app.use(cors({
+    origin: '*',  // Permite todas as origens
+}));
+
+
 // dados dos monitores
 const monitores = [
     // monitor Grabalos
@@ -88,7 +96,8 @@ app.get('/monitores/:id', (req, res) => {
     if (monitor) {
         res.json(monitor);
     } else {
-        res.json(404).json({ mensagem: 'Monitor não encontrado' });
+        //res.json(404).json({ mensagem: 'Monitor não encontrado' });
+        res.status(404).json({ mensagem: 'Monitor não encontrado' });
     }
 });
 
