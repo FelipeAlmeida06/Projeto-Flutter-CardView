@@ -63,6 +63,7 @@ class _CardCarouselState extends State<CardCarousel> {
         centerTitle: true,
         titleTextStyle:
             const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+        backgroundColor: Colors.purple,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
