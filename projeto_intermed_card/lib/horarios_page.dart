@@ -28,10 +28,21 @@ class _HorariosPageState extends State<HorariosPage> {
     try {
       final response = await http.get(url);
 
+      //print("Status Code: ${response.statusCode}");
+      //print("Response Body: ${response.body}");
+
+      Text("Status Code: ${response.statusCode}");
+      const SizedBox(height: 15.0);
+      Text("Response Body: ${response.body}");
+
       if (response.statusCode == 200) {
         List monitores = json.decode(response.body);
-        final monitor =
-            monitores.firstWhere((m) => m['nome'] == nome, orElse: () => null);
+        //final monitor =
+        //monitores.firstWhere((m) => m['nome'] == nome, orElse: () => null);
+        final monitor = monitores.firstWhere(
+          (m) => m['nome'].toLowerCase() == nome.toLowerCase(),
+          orElse: () => null,
+        );
 
         if (monitor != null) {
           setState(() {
