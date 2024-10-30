@@ -135,13 +135,13 @@ class _CardCarouselState extends State<CardCarousel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Carousel com Botão de Navegação'),
-        centerTitle: true,
-        titleTextStyle:
-            const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-        backgroundColor: Colors.purple,
-      ),
+      //appBar: AppBar(
+      //title: const Text('Carousel com Botão de Navegação'),
+      //centerTitle: true,
+      //titleTextStyle:
+      //const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+      //backgroundColor: Colors.purple,
+      //),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
