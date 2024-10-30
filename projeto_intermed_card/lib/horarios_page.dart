@@ -64,6 +64,7 @@ class _HorariosPageState extends State<HorariosPage> {
 
   @override
   Widget build(BuildContext context) {
+    /*
     return Scaffold(
       appBar: AppBar(
         title: Text('Horários de ${widget.nome}'),
@@ -89,6 +90,84 @@ class _HorariosPageState extends State<HorariosPage> {
                             : horarios.join(', ')),
                         const SizedBox(height: 10),
                       ],
+                    );
+                  }).toList(),
+                ),
+    );
+    */
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Horários de ${widget.nome}'),
+        backgroundColor: Colors.purple,
+      ),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : horariosDeMonitoria.isEmpty
+              ? const Center(child: Text('Horários não disponíveis'))
+              : ListView(
+                  padding: const EdgeInsets.all(16.0),
+                  children: horariosDeMonitoria.entries.map((entry) {
+                    String dia = entry.key;
+
+                    // Adiciona a terminação '-feira' nos dias da semana
+                    String diaComTerminacao = '';
+                    switch (dia) {
+                      case 'segunda':
+                        diaComTerminacao = 'Segunda-feira';
+                        break;
+                      case 'terca':
+                        diaComTerminacao = 'Terça-feira';
+                        break;
+                      case 'quarta':
+                        diaComTerminacao = 'Quarta-feira';
+                        break;
+                      case 'quinta':
+                        diaComTerminacao = 'Quinta-feira';
+                        break;
+                      case 'sexta':
+                        diaComTerminacao = 'Sexta-feira';
+                        break;
+                      case 'sabado':
+                        diaComTerminacao = 'Sábado';
+                        break;
+                      default:
+                        diaComTerminacao = dia; // caso não seja um dia válido
+                    }
+
+                    List horarios = entry.value;
+                    return Card(
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      elevation: 5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment
+                              .center, // Centraliza verticalmente
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center, // Centraliza horizontalmente
+                          children: [
+                            Text(
+                              //dia, // Dia da semana
+                              diaComTerminacao, // Dia da semana com terminação
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                  color: Colors.purple), // Estilo do dia
+                            ),
+                            const SizedBox(
+                                height: 10), // Espaço entre o dia e os horários
+                            Text(
+                              horarios.isEmpty
+                                  ? 'Sem horários disponíveis'
+                                  : horarios.join(', '), // Horários disponíveis
+                              style: const TextStyle(fontSize: 18),
+                              textAlign: TextAlign
+                                  .center, // Centraliza o texto dos horários
+                            ),
+                          ],
+                        ),
+                      ),
                     );
                   }).toList(),
                 ),
