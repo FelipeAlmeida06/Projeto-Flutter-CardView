@@ -40,11 +40,11 @@ class _CardCarouselState extends State<CardCarousel> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Mais Info'),
-          content: Text('Infos sobre $nome'),
+          title: const Text('Segue informações'), // Mais Info
+          content: Text('Horários de Monitoria $nome'), // Infos sobre $nome
           actions: [
             TextButton(
-              child: const Text('Fechar'),
+              child: const Text('Fechar View'), // Fechar
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -61,7 +61,6 @@ class _CardCarouselState extends State<CardCarousel> {
       appBar: AppBar(
         title: const Text('Carousel com Botão de Navegação'),
         centerTitle: true,
-        //backgroundColor: Colors.purple,
         titleTextStyle:
             const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
       ),
@@ -117,7 +116,8 @@ class _CardCarouselState extends State<CardCarousel> {
                         const SizedBox(height: 15.0),
                         ElevatedButton(
                           onPressed: () => _showDetails(card.nome),
-                          child: const Text('Mais Informações'),
+                          child: const Text(
+                              'Ver Horários'), // Mais Informações  + Info
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blueAccent,
                             padding: const EdgeInsets.symmetric(
