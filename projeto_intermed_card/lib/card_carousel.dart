@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:projeto_intermed_card/horarios_page.dart';
 import 'card_model.dart';
 
 // API Nodejs
-import 'package:http/http.dart' as http;
-import 'dart:convert'; // Para trabalhar com JSON
+//import 'package:http/http.dart' as http;
+//import 'dart:convert'; // Para trabalhar com JSON
 
 class CardCarousel extends StatefulWidget {
   @override
@@ -22,6 +23,7 @@ class _CardCarouselState extends State<CardCarousel> {
     CardModel(imagem: 'assets/avatar-homem.png', nome: 'Ricardo'),
   ];
 
+  /*
   // API NodeJs
   Future<void> _fetchMonitorHorarios(String nome) async {
     final url =
@@ -49,6 +51,7 @@ class _CardCarouselState extends State<CardCarousel> {
       print("Erro ao buscar os horários: $error");
     }
   }
+  */
 
   void _nextCard() {
     setState(() {
@@ -67,7 +70,6 @@ class _CardCarouselState extends State<CardCarousel> {
     });
   }
 
-  /*
   void _showDetails(String nome) {
     showDialog(
       context: context,
@@ -87,8 +89,8 @@ class _CardCarouselState extends State<CardCarousel> {
       },
     );
   }
-  */
 
+  /*
   void _showDetails(String nome, Map<String, dynamic> horariosDeMonitoria) {
     showDialog(
       context: context,
@@ -128,6 +130,7 @@ class _CardCarouselState extends State<CardCarousel> {
       },
     );
   }
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -189,6 +192,7 @@ class _CardCarouselState extends State<CardCarousel> {
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 15.0),
+
                         /*
                         ElevatedButton(
                           onPressed: () => _showDetails(card.nome),
@@ -203,6 +207,25 @@ class _CardCarouselState extends State<CardCarousel> {
                         */
 
                         ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HorariosPage(
+                                    nome: card.nome), // Passa o nome do monitor
+                              ),
+                            );
+                          },
+                          child: const Text('Ver Horários'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blueAccent,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                          ),
+                        ),
+
+                        /*
+                        ElevatedButton(
                           onPressed: () => _fetchMonitorHorarios(card.nome),
                           child: const Text('Ver Horários'),
                           style: ElevatedButton.styleFrom(
@@ -211,6 +234,7 @@ class _CardCarouselState extends State<CardCarousel> {
                                 horizontal: 20, vertical: 10),
                           ),
                         )
+                        */
                       ],
                     ),
                   );
