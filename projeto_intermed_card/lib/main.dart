@@ -18,7 +18,7 @@ class MainApp extends StatelessWidget {
               'Horários de Monitoria do DPD'), // Carrossel de Cards - Monitores
           centerTitle: true,
           titleTextStyle:
-              const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+              const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
           backgroundColor: Colors.blue,
         ),
         body: Center(
