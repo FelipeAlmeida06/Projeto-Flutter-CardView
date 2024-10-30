@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
 
 class CardModel {
-  Image imagem; // imagem
+  String imagem; // imagem
   String nome; // nome
 
   CardModel({
