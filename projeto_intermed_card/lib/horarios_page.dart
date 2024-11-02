@@ -1,10 +1,11 @@
+// Nome: Felipe Antônio de Oliveira Almeida      RA: 22130
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class HorariosPage extends StatefulWidget {
-  final String
-      nome; // // Você pode trocar para `int id` se preferir buscar pelo ID do monitor
+  final String nome;
 
   HorariosPage({required this.nome});
 
@@ -25,9 +26,6 @@ class _HorariosPageState extends State<HorariosPage> {
   Future<void> _fetchHorarios(String nome) async {
     final url = Uri.parse('http://localhost:3000/monitores'); // URL da API
 
-    //final url = Uri.parse('http://localhost:3000'); // URL da API
-    //final url = Uri.parse('http://10.0.2.2:3000/monitores');
-
     try {
       final response = await http.get(url);
 
@@ -40,8 +38,6 @@ class _HorariosPageState extends State<HorariosPage> {
 
       if (response.statusCode == 200) {
         List monitores = json.decode(response.body);
-        //final monitor =
-        //monitores.firstWhere((m) => m['nome'] == nome, orElse: () => null);
         final monitor = monitores.firstWhere(
           (m) => m['nome'].toLowerCase() == nome.toLowerCase(),
           orElse: () => null,
@@ -99,6 +95,9 @@ class _HorariosPageState extends State<HorariosPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Horários de ${widget.nome}'),
+        centerTitle: true,
+        titleTextStyle:
+            const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
         backgroundColor: Colors.purple,
       ),
       body: isLoading
@@ -110,6 +109,7 @@ class _HorariosPageState extends State<HorariosPage> {
                   children: horariosDeMonitoria.entries.map((entry) {
                     String dia = entry.key;
 
+                    /*
                     // Adiciona a terminação '-feira' nos dias da semana
                     String diaComTerminacao = '';
                     switch (dia) {
@@ -134,6 +134,7 @@ class _HorariosPageState extends State<HorariosPage> {
                       default:
                         diaComTerminacao = dia; // caso não seja um dia válido
                     }
+                    */
 
                     List horarios = entry.value;
                     return Card(
@@ -148,8 +149,8 @@ class _HorariosPageState extends State<HorariosPage> {
                               .center, // Centraliza horizontalmente
                           children: [
                             Text(
-                              //dia, // Dia da semana
-                              diaComTerminacao, // Dia da semana com terminação
+                              dia, // Dia da semana
+                              //diaComTerminacao, // Dia da semana com terminação
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 22,

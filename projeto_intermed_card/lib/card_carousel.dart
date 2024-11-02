@@ -1,11 +1,9 @@
+// Nome: Felipe Antônio de Oliveira Almeida      RA: 22130
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:projeto_intermed_card/horarios_page.dart';
 import 'card_model.dart';
-
-// API Nodejs
-//import 'package:http/http.dart' as http;
-//import 'dart:convert'; // Para trabalhar com JSON
 
 class CardCarousel extends StatefulWidget {
   @override
@@ -24,35 +22,6 @@ class _CardCarouselState extends State<CardCarousel> {
   ];
 
   /*
-  // API NodeJs
-  Future<void> _fetchMonitorHorarios(String nome) async {
-    final url =
-        Uri.parse('http://localhost:3000/monitores'); // URL da API local
-    try {
-      final response = await http.get(url);
-
-      if (response.statusCode == 200) {
-        // Processar a resposta JSON
-        List monitores = json.decode(response.body);
-        final monitor =
-            monitores.firstWhere((m) => m['nome'] == nome, orElse: () => null);
-
-        if (monitor != null) {
-          _showDetails(monitor['nome'], monitor['horariosDeMonitoria']);
-        } else {
-          _showDetails(
-              nome, {}); // Exibe uma mensagem se o monitor não for encontrado
-        }
-      } else {
-        _showDetails(
-            nome, {}); // Exibe uma mensagem se a resposta não for bem-sucedida
-      }
-    } catch (error) {
-      print("Erro ao buscar os horários: $error");
-    }
-  }
-  */
-
   void _nextCard() {
     setState(() {
       if (_currentIndex < cards.length - 1) {
@@ -69,7 +38,9 @@ class _CardCarouselState extends State<CardCarousel> {
       */
     });
   }
+  */
 
+  /*
   void _showDetails(String nome) {
     showDialog(
       context: context,
@@ -89,59 +60,20 @@ class _CardCarouselState extends State<CardCarousel> {
       },
     );
   }
-
-  /*
-  void _showDetails(String nome, Map<String, dynamic> horariosDeMonitoria) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Horários de $nome'),
-          content: horariosDeMonitoria.isNotEmpty
-              ? Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: horariosDeMonitoria.entries.map((entry) {
-                    String dia = entry.key;
-                    List horarios = entry.value;
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('$dia:',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(horarios.isEmpty
-                            ? 'Sem horários'
-                            : horarios.join(', ')),
-                        SizedBox(height: 8.0),
-                      ],
-                    );
-                  }).toList(),
-                )
-              : const Text('Horários não disponíveis'),
-          actions: [
-            TextButton(
-              child: const Text('Fechar'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        );
-      },
-    );
-  }
   */
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: AppBar(
-      //title: const Text('Carousel com Botão de Navegação'),
-      //centerTitle: true,
-      //titleTextStyle:
-      //const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-      //backgroundColor: Colors.purple,
-      //),
+      /*
+      appBar: AppBar(
+        title: const Text('Carousel com Botão de Navegação'),
+        centerTitle: true,
+        titleTextStyle:
+            const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+        backgroundColor: Colors.purple,
+      ),
+      */
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -192,20 +124,6 @@ class _CardCarouselState extends State<CardCarousel> {
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 15.0),
-
-                        /*
-                        ElevatedButton(
-                          onPressed: () => _showDetails(card.nome),
-                          child: const Text(
-                              'Ver Horários'), // Mais Informações  + Info
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueAccent,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                          ),
-                        ),
-                        */
-
                         ElevatedButton(
                           onPressed: () {
                             Navigator.push(
@@ -223,18 +141,6 @@ class _CardCarouselState extends State<CardCarousel> {
                                 horizontal: 20, vertical: 10),
                           ),
                         ),
-
-                        /*
-                        ElevatedButton(
-                          onPressed: () => _fetchMonitorHorarios(card.nome),
-                          child: const Text('Ver Horários'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueAccent,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                          ),
-                        )
-                        */
                       ],
                     ),
                   );
@@ -242,17 +148,6 @@ class _CardCarouselState extends State<CardCarousel> {
               );
             }).toList(),
           ),
-
-          /*
-          // Botão ">" fora do carousel
-          const SizedBox(height: 15.0),
-          IconButton(
-            icon: const Icon(Icons.arrow_forward),
-            onPressed: _nextCard,
-            iconSize: 30.0,
-            color: Colors.blueAccent,
-          ),
-          */
         ],
       ),
     );
@@ -260,18 +155,17 @@ class _CardCarouselState extends State<CardCarousel> {
 }
 
 
-
 /*
-                  Text('Email: ${card.email}',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16)),
-                  const SizedBox(height: 5.5),
-                  Text('Idade: ${card.idade}',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16)),
-                  const SizedBox(height: 5.5),
-                  Text('Cidade: ${card.cidade}',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16)),
-                  const SizedBox(height: 10),
+  Text('Email: ${card.email}',
+      style: const TextStyle(
+        fontWeight: FontWeight.bold, fontSize: 16)),
+  const SizedBox(height: 5.5),
+  Text('Idade: ${card.idade}',
+      style: const TextStyle(
+        fontWeight: FontWeight.bold, fontSize: 16)),
+  const SizedBox(height: 5.5),
+  Text('Cidade: ${card.cidade}',
+      style: const TextStyle(
+        fontWeight: FontWeight.bold, fontSize: 16)),
+  const SizedBox(height: 10),
 */

@@ -6,7 +6,7 @@ const porta = 3000;
 const cors = require('cors');
 
 app.use(cors({
-    origin: '*',  // Permite todas as origens
+    origin: '*',  // permite todas as origens de cors
 }));
 
 
