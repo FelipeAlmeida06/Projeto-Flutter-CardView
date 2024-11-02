@@ -4,11 +4,9 @@ const porta = 3000;
 
 // cors
 const cors = require('cors');
-
 app.use(cors({
     origin: '*',  // permite todas as origens de cors
 }));
-
 
 // dados dos monitores
 const monitores = [

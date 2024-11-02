@@ -14,17 +14,23 @@ class HorariosPage extends StatefulWidget {
 }
 
 class _HorariosPageState extends State<HorariosPage> {
-  Map<String, dynamic> horariosDeMonitoria = {};
-  bool isLoading = true;
+  Map<String, dynamic> horariosDeMonitoria =
+      {}; // chave do tipo String e valor do tipo dynamic, o que significa que pode ter qualquer tipo de dado
+  bool isLoading =
+      true; // variável de tipo booleana inicializada como verdadeiro (true)
 
   @override
   void initState() {
     super.initState();
-    _fetchHorarios(widget.nome); // Buscar dados do monitor ao carregar a página
+    _fetchHorarios(widget
+        .nome); // buscar dados do monitor ao carregar a página de visualização de horários
   }
 
+  // realiza uma requisiçao HTTP para buscar os horários de um monitor e atualiza o seu estado com os dados recebidos
+  // _fetchHorarios é uma função assíncrona
   Future<void> _fetchHorarios(String nome) async {
-    final url = Uri.parse('http://localhost:3000/monitores'); // URL da API
+    final url =
+        Uri.parse('http://localhost:3000/monitores'); // URL/endpoint da API
 
     try {
       final response = await http.get(url);
@@ -36,22 +42,31 @@ class _HorariosPageState extends State<HorariosPage> {
       const SizedBox(height: 15.0);
       Text("Response Body: ${response.body}");
 
+      // se o código for 200, significa que a requisição foi bem-sucedida e o servidor funcionou corretamente
       if (response.statusCode == 200) {
-        List monitores = json.decode(response.body);
+        List monitores =
+            json.decode(response.body); // resposta do servidor no formato json
+        // firstWhere é usada para encontrar o primeiro monitor na lista cujo nome corresponde ao parâmetro nome passado para a função
         final monitor = monitores.firstWhere(
-          (m) => m['nome'].toLowerCase() == nome.toLowerCase(),
-          orElse: () => null,
+          (m) =>
+              m['nome'].toLowerCase() ==
+              nome.toLowerCase(), // ignora diferenças de maiúsculas e minúsculas, usando toLowerCase().
+          orElse: () =>
+              null, // caso o monitor nao for encontardo, retorna null usando o orElse
         );
 
+        // se monitor nao for null, indica que ele foi encontrado
         if (monitor != null) {
           setState(() {
-            horariosDeMonitoria = monitor['horariosDeMonitoria'];
-            isLoading = false;
+            horariosDeMonitoria = monitor[
+                'horariosDeMonitoria']; // horários de monitoria do monitor encontrado
+            isLoading = false; // carregamento dos dados foi concluído
           });
         }
       }
     } catch (error) {
-      print("Erro ao buscar os horários: $error");
+      //print("Erro ao buscar os horários: $error"); printa no console o erro encontrado
+      Text("Erro ao buscar os horários: $error");
       setState(() {
         isLoading = false;
       });
@@ -60,41 +75,10 @@ class _HorariosPageState extends State<HorariosPage> {
 
   @override
   Widget build(BuildContext context) {
-    /*
     return Scaffold(
       appBar: AppBar(
-        title: Text('Horários de ${widget.nome}'),
-        backgroundColor: Colors.purple,
-      ),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : horariosDeMonitoria.isEmpty
-              ? const Center(child: Text('Horários não disponíveis'))
-              : ListView(
-                  padding: const EdgeInsets.all(16.0),
-                  children: horariosDeMonitoria.entries.map((entry) {
-                    String dia = entry.key;
-                    List horarios = entry.value;
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('$dia:',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18)),
-                        Text(horarios.isEmpty
-                            ? 'Sem horários'
-                            : horarios.join(', ')),
-                        const SizedBox(height: 10),
-                      ],
-                    );
-                  }).toList(),
-                ),
-    );
-    */
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Horários de ${widget.nome}'),
+        title: Text(
+            'Horários de ${widget.nome}'), // nome do monitor de acordo com a escolha do card
         centerTitle: true,
         titleTextStyle:
             const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
@@ -103,39 +87,13 @@ class _HorariosPageState extends State<HorariosPage> {
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : horariosDeMonitoria.isEmpty
-              ? const Center(child: Text('Horários não disponíveis'))
+              ? const Center(
+                  child: Text(
+                      'Horários não disponíveis')) // se der erro na API, mostra mensagem
               : ListView(
                   padding: const EdgeInsets.all(16.0),
                   children: horariosDeMonitoria.entries.map((entry) {
                     String dia = entry.key;
-
-                    /*
-                    // Adiciona a terminação '-feira' nos dias da semana
-                    String diaComTerminacao = '';
-                    switch (dia) {
-                      case 'segunda':
-                        diaComTerminacao = 'Segunda-feira';
-                        break;
-                      case 'terca':
-                        diaComTerminacao = 'Terça-feira';
-                        break;
-                      case 'quarta':
-                        diaComTerminacao = 'Quarta-feira';
-                        break;
-                      case 'quinta':
-                        diaComTerminacao = 'Quinta-feira';
-                        break;
-                      case 'sexta':
-                        diaComTerminacao = 'Sexta-feira';
-                        break;
-                      case 'sabado':
-                        diaComTerminacao = 'Sábado';
-                        break;
-                      default:
-                        diaComTerminacao = dia; // caso não seja um dia válido
-                    }
-                    */
-
                     List horarios = entry.value;
                     return Card(
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
@@ -143,14 +101,11 @@ class _HorariosPageState extends State<HorariosPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment
-                              .center, // Centraliza verticalmente
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center, // Centraliza horizontalmente
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               dia, // Dia da semana
-                              //diaComTerminacao, // Dia da semana com terminação
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 22,
@@ -160,7 +115,7 @@ class _HorariosPageState extends State<HorariosPage> {
                                 height: 10), // Espaço entre o dia e os horários
                             Text(
                               horarios.isEmpty
-                                  ? 'Sem horários disponíveis'
+                                  ? 'Sem horários disponíveis' // se houver horario vazio, mostra mensagem
                                   : horarios.join(', '), // Horários disponíveis
                               style: const TextStyle(fontSize: 18),
                               textAlign: TextAlign
