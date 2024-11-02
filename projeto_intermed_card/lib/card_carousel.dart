@@ -13,12 +13,20 @@ class CardCarousel extends StatefulWidget {
 class _CardCarouselState extends State<CardCarousel> {
   int _currentIndex = 0; // Índice atual da página
 
+  // lista que armazena objetos do tipo CardModel definidos pela classe CardModel: imagem e nome
   final List<CardModel> cards = [
-    CardModel(imagem: 'assets/avatar-homem.png', nome: 'Grabalos'),
-    CardModel(imagem: 'assets/avatar-mulher.png', nome: 'Beatriz'),
-    CardModel(imagem: 'assets/avatar-homem.png', nome: 'Marcos'),
-    CardModel(imagem: 'assets/avatar-mulher.png', nome: 'Anna'),
-    CardModel(imagem: 'assets/avatar-homem.png', nome: 'Ricardo'),
+    // construtor
+    CardModel(
+        imagem: 'assets/avatar-homem.png',
+        nome:
+            'Grabalos'), // armazena o caminho do arquivo de imagem e o nome do monitor
+    CardModel(
+        imagem: 'assets/avatar-mulher.png',
+        nome:
+            'Beatriz'), // armazena o caminho do arquivo de imagem e o nome do monitor
+    CardModel(imagem: 'assets/avatar-homem.png', nome: 'Marcos'), // ...
+    CardModel(imagem: 'assets/avatar-mulher.png', nome: 'Anna'), // ...
+    CardModel(imagem: 'assets/avatar-homem.png', nome: 'Ricardo'), // ...
   ];
 
   /*
@@ -65,19 +73,10 @@ class _CardCarouselState extends State<CardCarousel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*
-      appBar: AppBar(
-        title: const Text('Carousel com Botão de Navegação'),
-        centerTitle: true,
-        titleTextStyle:
-            const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-        backgroundColor: Colors.purple,
-      ),
-      */
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Carousel Slider para exibir os cards
+          // elemento principal: Carousel Slider para exibir os cards
           CarouselSlider(
             options: CarouselOptions(
               height: 250, // Ajusta a altura do carousel
