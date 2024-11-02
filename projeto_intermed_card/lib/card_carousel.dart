@@ -16,59 +16,15 @@ class _CardCarouselState extends State<CardCarousel> {
   // lista que armazena objetos do tipo CardModel definidos pela classe CardModel: imagem e nome
   final List<CardModel> cards = [
     // construtor
-    CardModel(
-        imagem: 'assets/avatar-homem.png',
-        nome:
-            'Grabalos'), // armazena o caminho do arquivo de imagem e o nome do monitor
-    CardModel(
-        imagem: 'assets/avatar-mulher.png',
-        nome:
-            'Beatriz'), // armazena o caminho do arquivo de imagem e o nome do monitor
+
+    // armazena o caminho do arquivo de imagem e o nome do monitor
+    CardModel(imagem: 'assets/avatar-homem.png', nome: 'Grabalos'),
+    // armazena o caminho do arquivo de imagem e o nome do monitor
+    CardModel(imagem: 'assets/avatar-mulher.png', nome: 'Beatriz'),
     CardModel(imagem: 'assets/avatar-homem.png', nome: 'Marcos'), // ...
     CardModel(imagem: 'assets/avatar-mulher.png', nome: 'Anna'), // ...
     CardModel(imagem: 'assets/avatar-homem.png', nome: 'Ricardo'), // ...
   ];
-
-  /*
-  void _nextCard() {
-    setState(() {
-      if (_currentIndex < cards.length - 1) {
-        _currentIndex++;
-      } else {
-        _currentIndex = 0; // Volta ao primeiro item se chegar ao final
-      }
-      /*
-      _carouselController.animateToPage(
-        _currentIndex,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-      */
-    });
-  }
-  */
-
-  /*
-  void _showDetails(String nome) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Segue informações'), // Mais Info
-          content: Text('Horários de Monitoria $nome'), // Infos sobre $nome
-          actions: [
-            TextButton(
-              child: const Text('Fechar View'), // Fechar
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        );
-      },
-    );
-  }
-  */
 
   @override
   Widget build(BuildContext context) {
@@ -76,21 +32,28 @@ class _CardCarouselState extends State<CardCarousel> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // elemento principal: Carousel Slider para exibir os cards
+          // elemento principal e fundamental: Carousel Slider para exibir os cards
           CarouselSlider(
             options: CarouselOptions(
-              height: 250, // Ajusta a altura do carousel
-              aspectRatio: 16 / 9,
-              viewportFraction: 0.8,
-              initialPage: _currentIndex,
-              enableInfiniteScroll: false,
+              height: 250, // altura do carousel
+              aspectRatio: 16 / 9, // relaçao entre a largura e a altura
+              viewportFraction: 0.8, // cada card ocupa 80% da largura da tela
+              initialPage:
+                  _currentIndex, // determina a página inicial do programa
+              enableInfiniteScroll:
+                  true, // os cards do carrossel se repetirão infinitamente sem interrupções
               enlargeCenterPage: true,
+
+              // é usado quando o usuário navega para uma nova página no carrossel
+              // - index: indice atual da página do carrossel
+              // - reason: razao por qual essa mudança ocorreu (ocorreu porque houve uma interação do usuário)
               onPageChanged: (index, reason) {
                 setState(() {
                   _currentIndex = index;
                 });
               },
             ),
+            // percorre e exibe os cards
             items: cards.map((card) {
               return Builder(
                 builder: (BuildContext context) {
@@ -98,31 +61,41 @@ class _CardCarouselState extends State<CardCarousel> {
                     width: MediaQuery.of(context).size.width,
                     margin: const EdgeInsets.symmetric(horizontal: 5.0),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white, // cor de fundo Container
+                      borderRadius: BorderRadius.circular(
+                          10), // raio nas bordas Container
+                      // cor de sombra Container
                       boxShadow: const [
                         BoxShadow(
                           color: Colors.grey,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
+                          blurRadius: 5, // 5px
+                          offset: Offset(0,
+                              3), // 3px para baixo e 0px de deslocamento no eixo X
                         ),
                       ],
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        // mostra a imagem do card no centro da tela
                         Image.asset(
                           card.imagem,
-                          height: 75,
-                          fit: BoxFit.cover,
+                          height: 75, // altura do card
+                          fit: BoxFit
+                              .cover, // define que a imagem deve se ajustar ao Container
                         ),
-                        const SizedBox(height: 15.0),
+                        const SizedBox(
+                            height:
+                                15.0), // espaçamento de altura entre a imagem e o nome
                         Text(
                           card.nome,
+                          // estilos do texto
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(height: 15.0),
+                        const SizedBox(
+                            height:
+                                15.0), // espaçamento de altura entre o nome e o botão
                         ElevatedButton(
                           onPressed: () {
                             Navigator.push(
@@ -133,9 +106,9 @@ class _CardCarouselState extends State<CardCarousel> {
                               ),
                             );
                           },
-                          child: const Text('Ver Horários'),
+                          child: const Text('Ver Horários'), // texto do botão
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueAccent,
+                            backgroundColor: Colors.blueAccent, // cor de fundo
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 10),
                           ),
@@ -145,26 +118,10 @@ class _CardCarouselState extends State<CardCarousel> {
                   );
                 },
               );
-            }).toList(),
+            }).toList(), // exibiçao do cards
           ),
         ],
       ),
     );
   }
 }
-
-
-/*
-  Text('Email: ${card.email}',
-      style: const TextStyle(
-        fontWeight: FontWeight.bold, fontSize: 16)),
-  const SizedBox(height: 5.5),
-  Text('Idade: ${card.idade}',
-      style: const TextStyle(
-        fontWeight: FontWeight.bold, fontSize: 16)),
-  const SizedBox(height: 5.5),
-  Text('Cidade: ${card.cidade}',
-      style: const TextStyle(
-        fontWeight: FontWeight.bold, fontSize: 16)),
-  const SizedBox(height: 10),
-*/
