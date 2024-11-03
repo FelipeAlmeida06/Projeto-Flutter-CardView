@@ -8,6 +8,7 @@ app.use(cors({
     origin: '*',  // permite todas as origens de cors
 }));
 
+
 // dados dos monitores
 const monitores = [
     // monitor Grabalos
